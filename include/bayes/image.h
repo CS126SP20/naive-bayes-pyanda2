@@ -34,7 +34,9 @@ class Image {
  public:
   [[nodiscard]] const vector<vector<char>>& GetImage() const;
   Image();
+  ~Image();
   Image(string &images_file_name, string &labels_file_name);
+  int CalcNumOfShadedPixels();
   friend istream& operator>>(istream& input, Image& image);
   friend ostream& operator<<(ostream& output, const Image& image);
 

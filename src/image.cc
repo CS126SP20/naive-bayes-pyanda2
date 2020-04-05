@@ -15,7 +15,10 @@ istream& operator>>(istream& input, Image& image) {
 ostream& operator<<(ostream& output, const Image& image) {
   return output;
 }
-Image::Image(string& images_file_name, string& labels_file_name) {
+Image::Image() = default;
+Image::~Image() = default;
+
+Image::Image(string &images_file_name, string &labels_file_name) {
   ifstream images_file;
   images_file.open(images_file_name);
   this->labels_file_name = labels_file_name;
@@ -31,7 +34,19 @@ Image::Image(string& images_file_name, string& labels_file_name) {
     image_char_2d.push_back(single_line_image);
   }
 }
-Image::Image() = default;
+
+int Image::CalcNumOfShadedPixels() {
+  int shaded_pixels_count = 0;
+  for (auto &characters_vector : image_char_2d) {
+    for (auto &character : characters_vector) {
+      if (character == '+' || character == '#') {
+        shaded_pixels_count++;
+      }
+    }
+  }
+  return shaded_pixels_count;
+}
+
 
 }  // namespace bayes
 
