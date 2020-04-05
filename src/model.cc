@@ -6,5 +6,8 @@
 
 namespace bayes {
 
+void Model::CalcProbsForPixel(const char& pixel) {
+
+}
 }  // namespace bayes
 

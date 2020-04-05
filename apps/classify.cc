@@ -5,30 +5,33 @@
 #include <bayes/model.h>
 #include <gflags/gflags.h>
 
-#include <string>
 #include <cstdlib>
+#include <fstream>
 #include <iostream>
-
+#include <string>
 
 // TODO(you): Change the code below for your project use case.
 
-DEFINE_string(name, "Clarice", "Your first name");
+DEFINE_string(name, "Pranav", "Your first name");
 DEFINE_bool(happy, false, "Whether the greeting is a happy greeting");
 
 
 int main(int argc, char** argv) {
-  gflags::SetUsageMessage(
-      "Greets you with your name. Pass --helpshort for options.");
+  string fileName;
+  fileName = argv[1];
 
-  gflags::ParseCommandLineFlags(&argc, &argv, true);
+// show all command line arguments
+  for (int i=0; i<argc; i++)
+    cout<<i<<": "<< *(argv+i) <<endl;
+  cout<<endl;
+  cout<<"fileName: "<<fileName<<endl;
 
-  if (FLAGS_name.empty()) {
-    std::cerr << "Please provide a name via the --name flag." << std::endl;
-    return EXIT_FAILURE;
+  string file_name = argv[1];
+  ifstream file;
+  file.open(file_name);
+  if (file.is_open()) {
+    std::cout << "Halelujah" << std::endl;
+
   }
-
-  const std::string punctuation = FLAGS_happy ? "!" : ".";
-
-  std::cout << "Hello, " << FLAGS_name << punctuation << std::endl;
-  return EXIT_SUCCESS;
+  return 0;
 }
